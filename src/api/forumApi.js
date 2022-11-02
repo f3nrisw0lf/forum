@@ -1,7 +1,10 @@
 import AxiosInstance from 'src/helper/AxiosInstance';
 
-async function getPosts() {}
-async function getPost(postId) {}
-async function createPost() {}
+const getPosts = () => AxiosInstance.get('/posts').then((res) => res.data);
 
-export { getPosts, getPost, createPost };
+const getPost = (postId) =>
+  AxiosInstance.get(`/posts/${postId}`).then((res) => res.data);
+
+// const createPost = () =>
+
+export { getPosts, getPost };
