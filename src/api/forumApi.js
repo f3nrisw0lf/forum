@@ -5,6 +5,10 @@ const getPosts = () => AxiosInstance.get('/posts').then((res) => res.data);
 const getPost = (postId) =>
   AxiosInstance.get(`/posts/${postId}`).then((res) => res.data);
 
-// const createPost = () =>
+const createPost = (post) => AxiosInstance.post('/posts/', post);
 
-export { getPosts, getPost };
+const createComment = (comment) => AxiosInstance.post('/comments/', comment);
+
+const createReport = (report) => AxiosInstance.post('/reports/', report);
+
+export { getPosts, getPost, createPost, createComment, createReport };
