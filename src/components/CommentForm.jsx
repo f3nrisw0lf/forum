@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useMutation } from 'react-query';
 
@@ -6,10 +6,7 @@ import { createComment } from 'src/api/forumApi';
 import useInput from 'src/hooks/useInput';
 
 export default function CommentForm({ post, username, ...props }) {
-  const { mutate, isLoading, isSuccess, reset } = useMutation(
-    'comment',
-    createComment
-  );
+  const { mutate, isLoading } = useMutation('comment', createComment);
   const [text, onTextChange, setText] = useInput('');
 
   const onSubmit = (e) => {
@@ -27,6 +24,7 @@ export default function CommentForm({ post, username, ...props }) {
           value={text}
           onChange={onTextChange}
           disabled={isLoading}
+          required
         />
         {isLoading && (
           <div

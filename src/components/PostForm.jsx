@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useMutation } from 'react-query';
 
@@ -28,6 +28,7 @@ export default function PostForm({ username, ...props }) {
             placeholder="Post now..."
             onChange={onTextChange}
             disabled={isLoading}
+            required
           />
         </div>
         {isLoading && (
