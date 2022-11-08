@@ -5,7 +5,7 @@ import Comment from 'src/components/Comment.jsx';
 import CommentForm from 'src/components/CommentForm';
 import ReportModal from 'src/components/ReportModal';
 
-export default function Post({ post, username, ...props }) {
+export default function Post({ post, username, refetch, ...props }) {
   const [reportModalShow, setReportModalShow] = useState(false);
   const [isHateStyle, setIsHateStyle] = useState(post.isHate);
 
@@ -58,7 +58,11 @@ export default function Post({ post, username, ...props }) {
             )}
           </Container>
           {post?.comments ? (
-            <CommentForm username={username} post={post?._id} />
+            <CommentForm
+              username={username}
+              post={post?._id}
+              refetch={refetch}
+            />
           ) : (
             <></>
           )}

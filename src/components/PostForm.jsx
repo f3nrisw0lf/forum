@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useMutation } from 'react-query';
 
@@ -6,9 +6,16 @@ import useInput from 'src/hooks/useInput';
 
 import { createPost } from 'src/api/forumApi';
 
-export default function PostForm({ username, ...props }) {
-  const { mutate, isLoading } = useMutation(createPost);
+export default function PostForm({ username, refetch, ...props }) {
+  const { mutate, isLoading, isSuccess, reset } = useMutation(createPost);
   const [text, onTextChange, setText] = useInput('');
+
+  useEffect(() => {
+    if (isSuccess) {
+      refetch();
+      reset();
+    }
+  });
 
   const onSubmit = (e) => {
     e.preventDefault();

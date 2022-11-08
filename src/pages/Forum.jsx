@@ -9,7 +9,7 @@ import UsernameModal from 'src/components/UsernameModal';
 import { getPosts } from 'src/api/forumApi';
 
 export default function Forum() {
-  const { data, status } = useQuery('posts', getPosts);
+  const { data, refetch, status } = useQuery('posts', getPosts);
   const [cookies, setCookies] = useCookies(['username']);
 
   const setUsername = (text) => {
@@ -27,12 +27,18 @@ export default function Forum() {
         <PostForm
           username={cookies.username}
           className="mb-2 p-3 border rounded"
+          refetch={refetch}
         />
         <div className="">
           {status === 'success' ? (
             data.map((post) => {
               return (
-                <Post post={post} key={post._id} username={cookies.username} />
+                <Post
+                  post={post}
+                  key={post._id}
+                  username={cookies.username}
+                  refetch={refetch}
+                />
               );
             })
           ) : (
