@@ -31,8 +31,9 @@ export default function PostForm({ username, refetch, ...props }) {
             <h5 className="fw-bold">Create Post</h5>
           </Form.Label>
           <Form.Control
-            type="text"
-            placeholder="Post now..."
+            as="textarea"
+            rows={3}
+            placeholder={`What's on your mind... ${username}`}
             onChange={onTextChange}
             disabled={isLoading}
             required

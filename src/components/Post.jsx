@@ -10,7 +10,7 @@ export default function Post({ post, username, refetch, ...props }) {
   const [isHateStyle, setIsHateStyle] = useState(post.isHate);
 
   return (
-    <ListGroupItem className="mb-1">
+    <ListGroupItem className="mb-1 shadow-sm">
       <Card className="">
         <Card.Body>
           <Container className="mx-0 mb-3 px-0">
@@ -20,7 +20,9 @@ export default function Post({ post, username, refetch, ...props }) {
               onClick={() => setIsHateStyle(false)}>
               {!isHateStyle && post?.content}
               {isHateStyle && (
-                <p className="text-center text-white h-100 py-2 my-auto">
+                <p
+                  className="text-center fw-bold text-white h-100 py-2 my-auto"
+                  style={{ cursor: 'pointer' }}>
                   Hate Speech
                 </p>
               )}

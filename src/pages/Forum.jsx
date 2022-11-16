@@ -5,6 +5,7 @@ import { useCookies } from 'react-cookie';
 import Post from 'src/components/Post';
 import PostForm from 'src/components/PostForm';
 import UsernameModal from 'src/components/UsernameModal';
+import NavbarLight from 'src/components/NavbarLight';
 
 import { getPosts } from 'src/api/forumApi';
 
@@ -22,29 +23,31 @@ export default function Forum() {
 
   return (
     <>
-      <UsernameModal show={!cookies.username} setUsername={setUsername} />
-      <div className="mx-4 my-2">
+      <NavbarLight />
+      <div className="d-flex flex-column gap-3 px-4">
+        <h1 className="fw-bold text-center my-3">Freedom Wall</h1>
+        <UsernameModal show={!cookies.username} setUsername={setUsername} />
         <PostForm
           username={cookies.username}
-          className="mb-2 p-3 border rounded"
+          className="mb-2 p-4 py-3 my-4 border rounded shadow"
           refetch={refetch}
         />
-        <div className="">
-          {status === 'success' ? (
-            data.map((post) => {
-              return (
-                <Post
-                  post={post}
-                  key={post._id}
-                  username={cookies.username}
-                  refetch={refetch}
-                />
-              );
-            })
-          ) : (
-            <h1>The Forum is Empty :)</h1>
-          )}
-        </div>
+        {status === 'success' ? (
+          data.map((post) => {
+            return (
+              <Post
+                post={post}
+                key={post._id}
+                username={cookies.username}
+                refetch={refetch}
+              />
+            );
+          })
+        ) : (
+          <div class="alert alert-light" role="alert">
+            The Forum is currently empty..
+          </div>
+        )}
       </div>
     </>
   );
