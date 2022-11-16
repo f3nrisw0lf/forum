@@ -4,6 +4,7 @@ import { Container, ListGroupItem, Card, Button } from 'react-bootstrap';
 import Comment from 'src/components/Comment.jsx';
 import CommentForm from 'src/components/CommentForm';
 import ReportModal from 'src/components/ReportModal';
+import Icon from 'src/static/icon.jpg';
 
 export default function Post({ post, username, refetch, ...props }) {
   const [reportModalShow, setReportModalShow] = useState(false);
@@ -13,20 +14,30 @@ export default function Post({ post, username, refetch, ...props }) {
     <ListGroupItem className="mb-1 shadow-sm">
       <Card className="">
         <Card.Body>
-          <Container className="mx-0 mb-3 px-0">
-            <Card.Title className="fw-bold">{post?.user?.username}</Card.Title>
-            <Card.Text
-              className={isHateStyle ? 'bg-black rounded text-black' : ''}
-              onClick={() => setIsHateStyle(false)}>
-              {!isHateStyle && post?.content}
-              {isHateStyle && (
-                <p
-                  className="text-center fw-bold text-white h-100 py-2 my-auto"
-                  style={{ cursor: 'pointer' }}>
-                  Hate Speech
-                </p>
-              )}
-            </Card.Text>
+          <Container className="mx-0 mb-3 px-0 d-flex gap-2">
+            <img
+              alt=""
+              src={Icon}
+              className="d-inline-block align-self-start"
+              style={{ width: '30px' }}
+            />
+            <div className="w-100">
+              <Card.Title className="fw-bold">
+                {post?.user?.username}
+              </Card.Title>
+              <Card.Text
+                className={isHateStyle ? 'bg-black rounded text-black' : ''}
+                onClick={() => setIsHateStyle(false)}>
+                {!isHateStyle && post?.content}
+                {isHateStyle && (
+                  <p
+                    className="text-center fw-bold text-white h-100 py-2 my-auto"
+                    style={{ cursor: 'pointer' }}>
+                    Hate Speech
+                  </p>
+                )}
+              </Card.Text>
+            </div>
           </Container>
           <Card.Footer className="bg-transparent py-1 px-0 gap-1 d-flex align-items-center">
             <p className="my-auto">{post?.createdAt}</p>

@@ -44,7 +44,7 @@ export default function Forum() {
             );
           })
         ) : (
-          <div class="alert alert-light" role="alert">
+          <div class="alert alert-secondary" role="alert">
             The Forum is currently empty..
           </div>
         )}

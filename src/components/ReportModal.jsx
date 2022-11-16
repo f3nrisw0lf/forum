@@ -52,10 +52,16 @@ export default function ReportModal({
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => reportOnClick(true)} variant="danger">
+        <Button
+          onClick={() => reportOnClick(true)}
+          className="fw-bold"
+          variant="danger">
           Report as Hate Speech
         </Button>
-        <Button onClick={() => reportOnClick(false)} variant="success">
+        <Button
+          onClick={() => reportOnClick(false)}
+          className="fw-bold"
+          variant="success">
           Report as Not Hate Speech
         </Button>
       </Modal.Footer>
