@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useCookies } from 'react-cookie';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 import Post from 'src/components/Post';
 import PostForm from 'src/components/PostForm';
@@ -12,6 +13,7 @@ import { getPosts } from 'src/api/forumApi';
 export default function Forum() {
   const { data, refetch, status } = useQuery('posts', getPosts);
   const [cookies, setCookies] = useCookies(['username']);
+  const [postAnimate] = useAutoAnimate();
 
   const setUsername = (text) => {
     setCookies('username', text, {
@@ -24,7 +26,7 @@ export default function Forum() {
   return (
     <>
       <NavbarLight />
-      <div className="d-flex flex-column gap-3 px-4">
+      <div className="d-flex flex-column gap-3 px-4" ref={postAnimate}>
         <h1 className="fw-bold text-center my-3">Freedom Wall</h1>
         <UsernameModal show={!cookies.username} setUsername={setUsername} />
         <PostForm

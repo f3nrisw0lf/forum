@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, ListGroupItem, Card, Button } from 'react-bootstrap';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 import Comment from 'src/components/Comment.jsx';
 import CommentForm from 'src/components/CommentForm';
@@ -9,6 +10,7 @@ import Icon from 'src/static/icon.jpg';
 export default function Post({ post, username, refetch, ...props }) {
   const [reportModalShow, setReportModalShow] = useState(false);
   const [isHateStyle, setIsHateStyle] = useState(post.isHate);
+  const [commentAnimate] = useAutoAnimate();
 
   return (
     <ListGroupItem className="mb-1 shadow-sm">
@@ -55,7 +57,9 @@ export default function Post({ post, username, refetch, ...props }) {
             content={post.content}
             username={username}
           />
-          <Container className="mx-3 mb-2 ps-2 mt-1 px-0 border-start border-2">
+          <Container
+            className="mx-3 mb-2 ps-2 mt-1 px-0 border-start border-2"
+            ref={commentAnimate}>
             {post?.comments ? (
               post?.comments.map((comment) => (
                 <>

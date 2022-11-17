@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar } from 'react-bootstrap';
+import SCSTImage from 'src/static/scst.png';
 
 export default function NavbarLight() {
   return (
@@ -10,7 +11,7 @@ export default function NavbarLight() {
       <Navbar.Brand className="d-flex gap-2">
         <img
           alt=""
-          src="/logo.svg"
+          src={SCSTImage}
           width="30"
           height="30"
           className="d-inline-block align-top align-self-center"
