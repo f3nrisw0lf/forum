@@ -7,15 +7,14 @@ import useInput from 'src/hooks/useInput';
 import { createPost } from 'src/api/forumApi';
 
 export default function PostForm({ username, refetch, ...props }) {
-  const { mutate, isLoading, isSuccess, reset } = useMutation(createPost);
-  const [text, onTextChange, setText] = useInput('');
-
-  useEffect(() => {
-    if (isSuccess) {
+  const { mutate, isLoading } = useMutation(createPost, {
+    onSuccess: () => {
       refetch();
-      reset();
-    }
+      setText('');
+    },
   });
+
+  const [text, onTextChange, setText] = useInput('');
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -33,6 +32,7 @@ export default function PostForm({ username, refetch, ...props }) {
           <Form.Control
             as="textarea"
             rows={3}
+            value={text}
             placeholder={`What's on your mind... ${username}`}
             onChange={onTextChange}
             disabled={isLoading}

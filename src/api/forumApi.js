@@ -11,4 +11,13 @@ const createComment = (comment) => AxiosInstance.post('/comments/', comment);
 
 const createReport = (report) => AxiosInstance.post('/reports/', report);
 
-export { getPosts, getPost, createPost, createComment, createReport };
+const checkUsernameExists = (data) => AxiosInstance.post('/user/unique', data);
+
+export {
+  getPosts,
+  getPost,
+  createPost,
+  createComment,
+  createReport,
+  checkUsernameExists,
+};

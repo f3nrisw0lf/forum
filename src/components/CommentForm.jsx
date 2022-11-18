@@ -7,18 +7,12 @@ import { createComment } from 'src/api/forumApi';
 import useInput from 'src/hooks/useInput';
 
 export default function CommentForm({ post, username, refetch, ...props }) {
-  const { mutate, isLoading, isSuccess, reset } = useMutation(
-    'comment',
-    createComment
-  );
-  const [text, onTextChange, setText] = useInput('');
-
-  useEffect(() => {
-    if (isSuccess) {
+  const { mutate, isLoading } = useMutation(createComment, {
+    onSuccess: () => {
       refetch();
-      reset();
-    }
+    },
   });
+  const [text, onTextChange, setText] = useInput('');
 
   const onSubmit = (e) => {
     e.preventDefault();

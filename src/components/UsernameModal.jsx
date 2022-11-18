@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useMutation } from 'react-query';
 import { Button, Form, Modal, Alert } from 'react-bootstrap';
 
 import useInput from 'src/hooks/useInput';
+import { checkUsernameExists } from 'src/api/forumApi';
 
 export default function UsernameModal({ setUsername, ...props }) {
+  const { mutate, isLoading } = useMutation(checkUsernameExists, {
+    onSuccess: (response) => {
+      console.log(response.data?.isUnique);
+      if (response?.data?.isUnique) {
+        setUsername(text);
+      } else {
+        setIsAlertHidden(false);
+      }
+    },
+  });
+  const [isAlertHidden, setIsAlertHidden] = useState(true);
   const [text, onTextChange] = useInput('');
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setUsername(text);
+    mutate({ username: text });
   };
 
   return (
@@ -24,13 +37,20 @@ export default function UsernameModal({ setUsername, ...props }) {
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={onSubmit} className="px-2 py-1">
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-2" controlId="formBasicEmail">
             <Form.Label className="fw-bold">Username</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter username..."
               onChange={onTextChange}
+              disabled={isLoading}
             />
+            <Alert
+              variant="primary"
+              className="mt-2 mb-0"
+              hidden={isAlertHidden}>
+              Username Exists
+            </Alert>
           </Form.Group>
           <Alert variant="warning" className="">
             <p className="fw-bold mb-1">Disclaimer</p>
