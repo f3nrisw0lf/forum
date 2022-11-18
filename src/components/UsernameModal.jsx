@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Button, Form, Modal, Alert } from 'react-bootstrap';
 
 import useInput from 'src/hooks/useInput';
 
@@ -32,6 +32,13 @@ export default function UsernameModal({ setUsername, ...props }) {
               onChange={onTextChange}
             />
           </Form.Group>
+          <Alert variant="warning" className="">
+            <p className="fw-bold mb-1">Disclaimer</p>
+            This is only a test forum for academic purposes. Any views or
+            opinions in this forum does not reflect the people and institutions
+            that the user may be associated with. Moreover, to keep your
+            anonymity, refrain from entering your real name. Thank you.
+          </Alert>
           <Button type="submit" className="visually-hidden">
             Submit
           </Button>
