@@ -46,6 +46,7 @@ export default function Comment({ comment, username, ...props }) {
           onHide={() => setReportModalShow(false)}
           show={reportModalShow}
           username={username}
+          content={text}
         />
       </div>
     </ListGroupItem>
